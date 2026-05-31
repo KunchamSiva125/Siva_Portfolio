@@ -4,9 +4,17 @@ const endpoint = import.meta.env.VITE_APPWRITE_ENDPOINT;
 const projectId = import.meta.env.VITE_APPWRITE_PROJECT_ID;
 
 const client = new Client();
-client
-    .setEndpoint(endpoint)
-    .setProject(projectId);
+
+if (!endpoint || !projectId) {
+    console.error(
+        "❌ Appwrite Error: Environment variables VITE_APPWRITE_ENDPOINT or VITE_APPWRITE_PROJECT_ID are missing! " +
+        "Please ensure your .env file is present and populated, and that you started the dev server from the correct directory."
+    );
+} else {
+    client
+        .setEndpoint(endpoint)
+        .setProject(projectId);
+}
 
 export const account = new Account(client);
 export const databases = new Databases(client);
