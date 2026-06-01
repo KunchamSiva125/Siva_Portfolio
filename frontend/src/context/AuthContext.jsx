@@ -23,6 +23,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async (email, password) => {
+        try {
+            // Clear any existing active session to prevent "session already active" errors
+            await appwriteService.logout();
+        } catch (error) {
+            // Ignore if there was no active session to delete
+        }
         const session = await appwriteService.login(email, password);
         await checkUserStatus();
         return session;

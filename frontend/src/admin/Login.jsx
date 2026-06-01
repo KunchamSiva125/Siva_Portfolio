@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
@@ -11,8 +11,15 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
+
+  // Automatically redirect to the dashboard if a session is already active
+  useEffect(() => {
+    if (user) {
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +31,9 @@ const Login = () => {
       toast.success('Login successful!');
       navigate('/admin/dashboard');
     } catch (error) {
-      toast.error('Invalid credentials. Please try again.');
+      console.error('Login error:', error);
+      const errorMessage = error?.message || 'Invalid credentials. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
