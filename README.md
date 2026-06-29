@@ -35,8 +35,6 @@ Update your `.env` file with your credentials.
 > [!IMPORTANT]
 > **Admin Login**: The login system now uses a **Username** field. 
 > To log in with the username **Siva**, you must create a user in your Appwrite console with the following details:
-> - **Email**: `Siva@admin.com`
-> - **Password**: `Siva@1250`
 
 ### 3. Installation
 
