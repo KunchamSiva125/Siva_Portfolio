@@ -2,6 +2,8 @@
 
 A modern, fully responsive, real-time dynamic portfolio website built with React, Tailwind CSS, Framer Motion, and Appwrite.
 
+Live Link: https://siva-portfolio-frontend.onrender.com/
+
 ## Features
 
 - **Dynamic Hero Section**: Typing animations and profile details.
